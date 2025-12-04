@@ -142,8 +142,17 @@ function App() {
             </main>
 
             <footer className="pf-footer">
-                Built with Spring Boot + React · Demo project by Cunningham
+                Built with Spring Boot + React · Demo project by{" "}
+                <a
+                    href="https://github.com/CunninghamLi"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="pf-footer-link"
+                >
+                    Cunningham Li
+                </a>
             </footer>
+
         </div>
     );
 }

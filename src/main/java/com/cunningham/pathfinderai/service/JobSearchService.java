@@ -47,8 +47,6 @@ public class JobSearchService {
             }
 
             List<JobDto> result = new ArrayList<>();
-
-            // Limit to first 5 jobs
             int limit = Math.min(jobsList.size(), 5);
 
             for (int i = 0; i < limit; i++) {
@@ -60,23 +58,20 @@ public class JobSearchService {
                 String title = safeString(jobMap.get("title"));
                 String company = safeString(jobMap.get("company_name"));
                 String location = safeString(jobMap.get("candidate_required_location"));
-                String description = safeString(jobMap.get("description"));
+                String rawDescription = safeString(jobMap.get("description"));
                 String url = safeString(jobMap.get("url"));
 
                 JobDto dto = new JobDto();
                 dto.setTitle(title.isBlank() ? "Unknown title" : title);
                 dto.setCompany(company.isBlank() ? "Unknown company" : company);
                 dto.setLocation(location.isBlank() ? "Remote" : location);
-                dto.setDescription(description.isBlank()
-                        ? "No description provided by the API."
-                        : description);
+                dto.setDescription(cleanDescription(rawDescription));
                 dto.setUrl(url.isBlank() ? "https://remotive.com/remote-jobs" : url);
 
                 result.add(dto);
             }
 
             if (result.isEmpty()) {
-                // Fallback if API returned nothing usable
                 return List.of(
                         new JobDto(
                                 "No matching jobs found",
@@ -93,7 +88,6 @@ public class JobSearchService {
         } catch (Exception e) {
             e.printStackTrace();
 
-            // Hard fallback: one fake job if the API call fails
             JobDto fallback = new JobDto(
                     "Junior Backend Developer (mocked)",
                     "Demo Jobs API",
@@ -107,5 +101,28 @@ public class JobSearchService {
 
     private String safeString(Object value) {
         return value == null ? "" : value.toString().trim();
+    }
+
+    /**
+     * Turn the HTML description from the API into a short, plain-text summary.
+     */
+    private String cleanDescription(String html) {
+        if (html == null || html.isBlank()) {
+            return "No description provided by the API.";
+        }
+
+        // 1) Strip HTML tags
+        String noTags = html.replaceAll("<[^>]*>", " ");
+
+        // 2) Collapse extra whitespace
+        String normalized = noTags.replaceAll("\\s+", " ").trim();
+
+        // 3) Optional: truncate to keep cards short
+        int maxLen = 400;
+        if (normalized.length() > maxLen) {
+            normalized = normalized.substring(0, maxLen) + "...";
+        }
+
+        return normalized;
     }
 }

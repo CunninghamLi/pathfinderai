@@ -3,11 +3,12 @@ package com.cunningham.pathfinderai.service;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class SkillExtractor {
 
-    // Common programming languages and tech keywords.
     private static final List<String> KNOWN_SKILLS = List.of(
             "java",
             "javascript",
@@ -53,14 +54,19 @@ public class SkillExtractor {
         List<String> found = new ArrayList<>();
 
         for (String skill : KNOWN_SKILLS) {
-            if (lower.contains(skill)) {
-                found.add(formatSkill(skill));
+            String skillLower = skill.toLowerCase(Locale.ROOT);
+
+            // \b = word boundary, Pattern.quote() to escape +, #, .
+            Pattern pattern = Pattern.compile("\\b" + Pattern.quote(skillLower) + "\\b");
+            Matcher matcher = pattern.matcher(lower);
+
+            if (matcher.find()) {
+                found.add(formatSkill(skillLower));
             }
         }
 
         // Remove duplicates and keep order
-        LinkedHashSet<String> unique = new LinkedHashSet<>(found);
-        return new ArrayList<>(unique);
+        return new ArrayList<>(new LinkedHashSet<>(found));
     }
 
     private String formatSkill(String raw) {

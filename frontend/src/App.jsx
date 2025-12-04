@@ -43,65 +43,107 @@ function App() {
     };
 
     return (
-        <div className="app">
-            <header className="app-header">
-                <h1>PathFinder AI</h1>
-                <p>Describe your skills and I will suggest jobs.</p>
+        <div className="pf-app">
+            <header className="pf-header">
+                <div className="pf-header-left">
+                    <div className="pf-logo-circle">PF</div>
+                    <div>
+                        <h1 className="pf-title">PathFinder AI</h1>
+                        <p className="pf-subtitle">
+                            Describe your skills and let PathFinder suggest real jobs for you.
+                        </p>
+                    </div>
+                </div>
+                <div className="pf-header-right">
+                    <span className="pf-badge">Student demo</span>
+                </div>
             </header>
 
-            <main className="app-main">
-                <form onSubmit={handleSubmit} className="chat-form">
-                    <label htmlFor="message">Tell me about your skills or what you want:</label>
-                    <textarea
-                        id="message"
-                        rows={4}
-                        placeholder="Example: I know Java, Spring Boot, React, and SQL and I want a junior backend job in Montreal."
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                    />
+            <main className="pf-main">
+                {/* Left side: input + assistant reply */}
+                <section className="pf-panel pf-panel-chat">
+                    <h2 className="pf-panel-title">Your skills</h2>
+                    <p className="pf-panel-help">
+                        Example: <span>Java, Spring Boot, React, Docker</span>
+                    </p>
 
-                    <button type="submit" disabled={loading}>
-                        {loading ? "Thinking..." : "Ask PathFinder"}
-                    </button>
-                </form>
+                    <form className="pf-form" onSubmit={handleSubmit}>
+                        <label className="pf-label" htmlFor="skillsInput">
+                            Tell me what technologies you know:
+                        </label>
+                        <textarea
+                            id="skillsInput"
+                            className="pf-textarea"
+                            rows={4}
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            placeholder="Java, JavaScript, React, SQL..."
+                        />
 
-                {error && <div className="error-box">{error}</div>}
+                        <div className="pf-form-footer">
+                            {error && <div className="pf-error">{error}</div>}
 
-                {reply && (
-                    <section className="reply-section">
-                        <h2>Assistant reply</h2>
-                        <p style={{ whiteSpace: "pre-wrap" }}>{reply}</p>
-                    </section>
-                )}
+                            <button
+                                type="submit"
+                                className="pf-button"
+                                disabled={loading || !message.trim()}
+                            >
+                                {loading ? "Thinking..." : "Ask PathFinder"}
+                            </button>
+                        </div>
+                    </form>
 
-                {jobs.length > 0 && (
-                    <section className="jobs-section">
-                        <h2>Job recommendations</h2>
-                        <ul className="job-list">
-                            {jobs.map((job, idx) => (
-                                <li key={idx} className="job-card">
-                                    <h3>{job.title}</h3>
-                                    <p>
-                                        <strong>Company:</strong> {job.company}
-                                    </p>
-                                    <p>
-                                        <strong>Location:</strong> {job.location}
-                                    </p>
-                                    <p className="job-description">
-                                        {job.description?.slice(0, 250)}
-                                        {job.description && job.description.length > 250 ? "..." : ""}
-                                    </p>
-                                    {job.url && (
-                                        <a href={job.url} target="_blank" rel="noreferrer">
-                                            View job posting
-                                        </a>
-                                    )}
-                                </li>
+                    <div className="pf-assistant">
+                        <h3 className="pf-assistant-title">Assistant reply</h3>
+                        <div className="pf-assistant-box">
+                            {reply ? (
+                                <p>{reply}</p>
+                            ) : (
+                                <p className="pf-assistant-placeholder">
+                                    I will analyze your skills and summarize what I see here.
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Right side: job cards */}
+                <section className="pf-panel pf-panel-jobs">
+                    <h2 className="pf-panel-title">Job recommendations</h2>
+
+                    {jobs.length === 0 ? (
+                        <p className="pf-empty-state">
+                            No jobs yet. Enter your skills on the left and click
+                            <span> Ask PathFinder</span>.
+                        </p>
+                    ) : (
+                        <div className="pf-jobs-grid">
+                            {jobs.map((job, index) => (
+                                <article key={index} className="pf-job-card">
+                                    <h3 className="pf-job-title">{job.title}</h3>
+                                    <p className="pf-job-company">{job.company}</p>
+                                    <p className="pf-job-location">{job.location}</p>
+
+                                    <p className="pf-job-desc">{job.description}</p>
+
+                                    <a
+                                        href={job.url}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="pf-job-link"
+                                    >
+                                        View job posting
+                                    </a>
+                                </article>
                             ))}
-                        </ul>
-                    </section>
-                )}
+                        </div>
+                    )}
+                </section>
             </main>
+
+            <footer className="pf-footer">
+                Built with Spring Boot + React · Demo project by Cunningham
+            </footer>
         </div>
     );
 }

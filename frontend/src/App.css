@@ -40,3 +40,304 @@
 .read-the-docs {
   color: #888;
 }
+/* Root layout */
+.pf-app {
+    min-height: 100vh;
+    background: radial-gradient(circle at top, #20242f, #090b10 60%);
+    color: #f5f5f5;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+/* Header */
+.pf-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    gap: 16px;
+}
+
+.pf-header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.pf-logo-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #6366f1, #22c55e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.pf-title {
+    font-size: 1.6rem;
+    margin: 0;
+}
+
+.pf-subtitle {
+    margin: 4px 0 0;
+    font-size: 0.9rem;
+    color: #cbd5f5;
+}
+
+.pf-header-right {
+    display: flex;
+    align-items: center;
+}
+
+.pf-badge {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    color: #e5e7eb;
+    background: rgba(15, 23, 42, 0.6);
+}
+
+/* Main two-column layout */
+.pf-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr);
+    gap: 20px;
+}
+
+@media (max-width: 900px) {
+    .pf-main {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Panels */
+.pf-panel {
+    background: rgba(15, 23, 42, 0.95);
+    border-radius: 18px;
+    padding: 18px 20px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.pf-panel-title {
+    margin: 0 0 4px;
+    font-size: 1.1rem;
+}
+
+.pf-panel-help {
+    margin: 0 0 14px;
+    font-size: 0.85rem;
+    color: #9ca3af;
+}
+
+.pf-panel-help span {
+    background: rgba(55, 65, 81, 0.7);
+    padding: 2px 6px;
+    border-radius: 999px;
+}
+
+/* Form */
+.pf-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.pf-label {
+    font-size: 0.9rem;
+    color: #d1d5db;
+}
+
+.pf-textarea {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+
+    height: 140px; /* good default */
+    max-height: 250px;
+
+    resize: vertical; /* user can resize only up/down */
+
+    padding: 12px;
+    font-size: 1rem;
+    line-height: 1.4;
+
+    border: 2px solid rgba(120, 140, 255, 0.4);
+    border-radius: 12px;
+    background-color: #0f1520;
+    color: #e8eaff;
+
+    box-sizing: border-box; /* prevents overflow */
+    overflow: auto; /* scroll inside the textarea */
+}
+
+.pf-textarea::placeholder {
+    color: #6b7280;
+}
+
+.pf-textarea:focus {
+    outline: none;
+    border-color: #7a9bff;
+    box-shadow: 0 0 6px rgba(120, 140, 255, 0.5);
+}
+
+.pf-form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.pf-error {
+    font-size: 0.8rem;
+    color: #fecaca;
+}
+
+/* Button */
+.pf-button {
+    border: none;
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    background: linear-gradient(135deg, #6366f1, #22c55e);
+    color: #f9fafb;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    white-space: nowrap;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+}
+
+.pf-button:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(79, 70, 229, 0.4);
+}
+
+.pf-button:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+/* Assistant reply box */
+.pf-assistant {
+    margin-top: 8px;
+}
+
+.pf-assistant-title {
+    font-size: 0.95rem;
+    margin: 0 0 6px;
+    color: #e5e7eb;
+}
+
+.pf-assistant-box {
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: 12px;
+    padding: 12px 14px;
+    border: 1px solid rgba(75, 85, 99, 0.9);
+    font-size: 0.9rem;
+    color: #e5e7eb;
+    line-height: 1.4;
+}
+
+.pf-assistant-placeholder {
+    color: #9ca3af;
+}
+
+/* Jobs panel */
+.pf-empty-state {
+    font-size: 0.9rem;
+    color: #9ca3af;
+}
+
+.pf-empty-state span {
+    margin-left: 4px;
+    font-weight: 500;
+    color: #e5e7eb;
+}
+
+.pf-jobs-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    margin-top: 8px;
+}
+
+@media (min-width: 1100px) {
+    .pf-jobs-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Job cards */
+.pf-job-card {
+    background: radial-gradient(circle at top left, #111827, #020617 70%);
+    border-radius: 14px;
+    padding: 12px 13px;
+    border: 1px solid rgba(55, 65, 81, 0.8);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.pf-job-title {
+    font-size: 0.98rem;
+    margin: 0;
+    color: #f9fafb;
+}
+
+.pf-job-company {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #cbd5f5;
+}
+
+.pf-job-location {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
+.pf-job-desc {
+    margin: 4px 0 6px;
+    font-size: 0.8rem;
+    color: #e5e7eb;
+    max-height: 90px;
+    overflow: hidden;
+}
+
+/* Link */
+.pf-job-link {
+    margin-top: auto;
+    align-self: flex-start;
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: #a5b4fc;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(129, 140, 248, 0.7);
+    transition: background 0.12s ease, color 0.12s ease, transform 0.12s ease;
+}
+
+.pf-job-link:hover {
+    background: rgba(129, 140, 248, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Footer */
+.pf-footer {
+    margin-top: 20px;
+    font-size: 0.75rem;
+    text-align: center;
+    color: #6b7280;
+}
+

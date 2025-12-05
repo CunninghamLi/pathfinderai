@@ -27,16 +27,16 @@ public class ChatController {
     public ResponseEntity<ChatResponse> chat(@RequestBody ChatRequest request) {
         String userMessage = request.getMessage();
 
-        // 1) Extract skills from the user message
+        // Extract skills from the user message
         List<String> skills = skillExtractor.extractSkills(userMessage);
 
-        // 2) Get mocked jobs based on the skills / message
+        // Get mocked jobs based on the skills / message
         List<JobDto> jobs = jobSearchService.searchJobs(userMessage);
 
-        // 3) Build a simple reply text (no OpenAI)
+        // Build a simple reply text (no OpenAI)
         String reply = buildSimpleReply(userMessage, skills, jobs);
 
-        // 4) Return reply + jobs list
+        // Return reply + jobs list
         ChatResponse response = new ChatResponse(reply, jobs);
         return ResponseEntity.ok(response);
     }

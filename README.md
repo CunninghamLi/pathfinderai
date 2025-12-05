@@ -37,12 +37,3 @@ This project shows:
 ## 🚀 Live Services
 - Frontend: https://pathfinderai-frontend.vercel.app  
 - Backend: https://pathfinderai-backend.onrender.com  
-
----
-
-## 📂 Running the project locally
-
-### Backend
-```bash
-cd backend
-./gradlew bootRun

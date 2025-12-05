@@ -69,12 +69,18 @@ body {
     width: 44px;
     height: 44px;
     border-radius: 999px;
-    background: linear-gradient(135deg, #6366f1, #22c55e);
+    background: radial-gradient(circle at top left, #1e293b, #020617);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+    overflow: hidden;
+}
+
+.pf-logo-img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    display: block;
 }
 
 .pf-title {

@@ -46,7 +46,11 @@ function App() {
         <div className="pf-app">
             <header className="pf-header">
                 <div className="pf-header-left">
-                    <div className="pf-logo-circle">PF</div>
+                    <div className="pf-logo-circle"><img
+                        src="/pathfinderailogo.webp"
+                        alt="PathFinder AI logo"
+                        className="pf-logo-img"
+                    /></div>
                     <div>
                         <h1 className="pf-title">PathFinder AI</h1>
                         <p className="pf-subtitle">

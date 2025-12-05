@@ -5,7 +5,7 @@ It analyzes the technologies provided (Java, React, SQL, etc.) and fetches match
 
 Frontend (React + Vite)  
 Backend (Spring Boot, Java 17)  
-Live demo: **https://pathfinderai-frontend.vercel.app**
+Live demo: **https://pathfinderai-sandy.vercel.app/**
 
 ---
 
@@ -35,5 +35,5 @@ This project shows:
 ---
 
 ## 🚀 Live Services
-- Frontend: https://pathfinderai-frontend.vercel.app  
-- Backend: https://pathfinderai-backend.onrender.com  
+- Frontend: https://pathfinderai-sandy.vercel.app/
+- Backend: https://pathfinderai-backend.onrender.com

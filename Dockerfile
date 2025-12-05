@@ -1,9 +1,11 @@
-FROM gradle:8.5-jdk17 AS builder
+FROM eclipse-temurin:17-jdk AS builder
 WORKDIR /app
 
 COPY . .
 
-RUN gradle clean bootJar --no-daemon
+RUN chmod +x gradlew
+
+RUN ./gradlew clean bootJar --no-daemon
 
 FROM eclipse-temurin:17-jre
 WORKDIR /app
@@ -11,6 +13,4 @@ WORKDIR /app
 COPY --from=builder /app/build/libs/*.jar app.jar
 
 EXPOSE 8080
-
-# Run the jar
 CMD ["java", "-jar", "app.jar"]

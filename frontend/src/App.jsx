@@ -36,7 +36,7 @@ function App() {
             setJobs(Array.isArray(data.jobs) ? data.jobs : []);
         } catch (err) {
             console.error(err);
-            setError("Could not reach backend. Is Spring Boot running on port 8080?");
+            setError("There was an error, please be patient while the dev finds a fix.");
         } finally {
             setLoading(false);
         }
